@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Error</title>
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6 text-center">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h1 class="display-1 text-muted" th:text="${status}">Error</h1>
+                    <h2 class="card-title mb-4" th:text="${title}">Error Occurred</h2>
+                    <p class="card-text mb-4" th:text="${errorMessage}">
+                        An error has occurred.
+                    </p>
+                    <a href="/" class="btn btn-primary">
+                        Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

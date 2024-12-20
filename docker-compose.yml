@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:17.2
+    container_name: postgres-dev
+    environment:
+      POSTGRES_DB: bulletin
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: supersecret
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres_network
+
+networks:
+  postgres_network:
+    driver: bridge

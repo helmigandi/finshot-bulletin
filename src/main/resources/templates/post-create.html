@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${isEdit ? 'Edit Post' : 'Create New Post'}">Create/Edit Post</title>
+    <!-- Bootstrap CSS -->
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="mb-4" th:text="${isEdit ? 'Edit Post' : 'Create New Post'}">Create/Edit Post</h2>
+
+            <form th:action="${isEdit ? '/posts/' + postId + '/edit' : '/posts/create'}"
+                  th:object="${postRequest}"
+                  method="post">
+
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text"
+                           class="form-control"
+                           id="title"
+                           th:field="*{title}"
+                           th:classappend="${#fields.hasErrors('title')} ? 'is-invalid' : ''">
+                    <div class="invalid-feedback"
+                         th:if="${#fields.hasErrors('title')}"
+                         th:errors="*{title}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="authorName" class="form-label">Author Name</label>
+                    <input type="text"
+                           class="form-control"
+                           id="authorName"
+                           th:field="*{authorName}"
+                           th:classappend="${#fields.hasErrors('authorName')} ? 'is-invalid' : ''">
+                    <div class="invalid-feedback"
+                         th:if="${#fields.hasErrors('authorName')}"
+                         th:errors="*{authorName}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="content" class="form-label">Content</label>
+                    <textarea class="form-control"
+                              id="content"
+                              rows="10"
+                              th:field="*{content}"
+                              th:classappend="${#fields.hasErrors('content')} ? 'is-invalid' : ''">
+                        </textarea>
+                    <div class="invalid-feedback"
+                         th:if="${#fields.hasErrors('content')}"
+                         th:errors="*{content}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="postPassword" class="form-label">Post Password</label>
+                    <input type="password"
+                           class="form-control"
+                           id="postPassword"
+                           th:field="*{postPassword}"
+                           th:classappend="${#fields.hasErrors('postPassword')} ? 'is-invalid' : ''">
+                    <div class="invalid-feedback"
+                         th:if="${#fields.hasErrors('postPassword')}"
+                         th:errors="*{postPassword}">
+                    </div>
+                    <small class="form-text text-muted" th:if="${isEdit}">
+                        Enter the post's password to confirm the update
+                    </small>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit"
+                            class="btn btn-primary"
+                            th:text="${isEdit ? 'Update Post' : 'Create Post'}">
+                        Submit
+                    </button>
+                    <a th:href="@{/}" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
